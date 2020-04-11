@@ -6,7 +6,7 @@ class Users(models.Model):
     username = models.CharField(max_length=255, default='')
     email = models.EmailField(max_length=255, default='')
     password = models.CharField(max_length=255, default='')
-    birthday = models.DateField( auto_now=True, blank=True)
+    birthday = models.DateField(auto_now=True, blank=True)
     gender_choices = [
         ('M', 'Male'),
         ('F', 'Female')
