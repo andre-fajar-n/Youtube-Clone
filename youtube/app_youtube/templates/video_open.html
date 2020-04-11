@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- start content video -->
+                <div class="col-md-8">
+                    <video width="100%" controls>
+                        <source src="{{open_video.video.url}}" type="video/mp4">
+                        <source src="{{open_video.video.url}}" type="video/ogg">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <strong>{{open_video.title}}</strong>
+                    <!-- start info video -->
+                    <div class="info-video row">
+                        <!-- start view & upload date -->
+                        <div class="col-5">
+                            <p class="">... views &middot; {{open_video.post_date.date}}</p>
+                        </div>
+                        <!-- end view & upload date -->
+                        <!-- start like, dislike, etc -->
+                        <div class="col-7">
+                            <img src="{% static 'images/like.png' %}" style="height: 15px;">
+                            <p class="d-inline">
+                                {%  %}
+                                {{open_video.like_set.all|length}}&nbsp;
+                            </p>
+                            <img src="{% static 'images/dislike.png' %}" style="height: 15px;">
+                            <p class="d-inline">{{open_video.dislike_set.all|length}}&nbsp;</p>
+                            <img src="{% static 'images/share.png' %}" style="height: 15px;">
+                            <p class="d-inline">SHARE&nbsp;</p>
+                            <img src="{% static 'images/save.png' %}" style="height: 15px;">
+                            <p class="d-inline">SAVE&nbsp;</p>
+                        </div>
+                        <!-- end like, dislike, etc -->
+                    </div>
+                    <strong>{{open_video.username}}</strong>
+                    <p>{{open_video.description}}</p>
+                    <!-- end info video -->
+                </div>
+                <!-- end content video -->
+                <!-- start other video -->
+                <div class="col-md-4">
+                    {% for video in videos %}
+                    <div class="row">
+                        <div class="col-5">
+                            <video src="{{video.video.url}}" width="100%" controls>
+                                <source src="{{video.video.url}}" type="video/mp4">
+                                <source src="{{video.video.url}}" type="video/ogg">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                        <div class="col-7">
+                            <strong class="mb-0 title-other-video">{{video.title}}</strong>
+                            <p class="mb-0 info-other-video">{{video.username}}</p>
+                            <p class="mb-0 info-other-video">... view &middot; {{video.post_date.date}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- end other video -->
+            </div>
+        </div>
+    </section>
+</body>
+</html>
