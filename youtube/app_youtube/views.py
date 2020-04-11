@@ -1,8 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Users, Videos, Comments, Likes, Dislikes, UserViews
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    videos = Videos.objects.all()
+    return render(request, 'index.html', {'videos': videos})
 
-def video(request):
-    return render(request, 'video.html')
+def video_open(request, video_id):
+    open_video = get_object_or_404(Videos, pk=video_id)
+    videos = Videos.objects.all()
+    likes = Likes.objects.all()
+    dislikes = Dislikes.objects.all()
+    comments = Comments.objects.all()
+    view_videos = UserViews.objects.all()
+    return render(request, 'video_open.html', {
+        'open_video':open_video,
+        'videos': videos,
+        'likes': likes,
+        'dislikes': dislikes,
+        'comments': comments,
+        'view_videos': view_videos
+    })
