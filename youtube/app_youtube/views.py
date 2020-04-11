@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Users, Videos, Comments, Likes, Dislikes, UserViews
+from .forms import VideoSearchForm
 
 # Create your views here.
 def index(request):
@@ -17,3 +18,16 @@ def video_open(request, video_id):
         'comments': comments,
         'view_videos': view_videos
     })
+    
+def videos(request):
+    searchvalue=''
+    form= VideoSearchForm(request.POST or None)
+    if form.is_valid():
+        searchvalue= form.cleaned_data.get("search")
+
+    searchresults= Videos.objects.filter(title__icontains= searchvalue)
+    context= {'form': form,
+              'searchresults': searchresults,
+              }
+    
+    return render(request, 'searchpage.html', context)
