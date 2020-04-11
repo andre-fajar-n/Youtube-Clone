@@ -24,18 +24,15 @@
                     <div class="info-video row">
                         <!-- start view & upload date -->
                         <div class="col-5">
-                            <p class="">... views &middot; {{open_video.post_date.date}}</p>
+                            <p class="">{{open_video.userviews_set.all|length}} views &middot; {{open_video.post_date.date}}</p>
                         </div>
                         <!-- end view & upload date -->
                         <!-- start like, dislike, etc -->
                         <div class="col-7">
                             <img src="{% static 'images/like.png' %}" style="height: 15px;">
-                            <p class="d-inline">
-                                {%  %}
-                                {{open_video.like_set.all|length}}&nbsp;
-                            </p>
+                            <p class="d-inline">{{open_video.likes_set.all|length}}&nbsp;</p>
                             <img src="{% static 'images/dislike.png' %}" style="height: 15px;">
-                            <p class="d-inline">{{open_video.dislike_set.all|length}}&nbsp;</p>
+                            <p class="d-inline">{{open_video.dislikes_set.all|length}}&nbsp;</p>
                             <img src="{% static 'images/share.png' %}" style="height: 15px;">
                             <p class="d-inline">SHARE&nbsp;</p>
                             <img src="{% static 'images/save.png' %}" style="height: 15px;">
@@ -45,6 +42,7 @@
                     </div>
                     <strong>{{open_video.username}}</strong>
                     <p>{{open_video.description}}</p>
+                    
                     <!-- end info video -->
                 </div>
                 <!-- end content video -->
@@ -62,7 +60,7 @@
                         <div class="col-7">
                             <strong class="mb-0 title-other-video">{{video.title}}</strong>
                             <p class="mb-0 info-other-video">{{video.username}}</p>
-                            <p class="mb-0 info-other-video">... view &middot; {{video.post_date.date}}</p>
+                            <p class="mb-0 info-other-video">{{video.userviews_set.all|length}} view &middot; {{video.post_date.date}}</p>
                         </div>
                     </div>
                     {% endfor %}
