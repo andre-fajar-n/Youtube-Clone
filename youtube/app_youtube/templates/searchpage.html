@@ -1,85 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube</title>
-    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <header>
-        <div class="topnav">
-            <div class="row">
-                <div class="col-1">
-                    <div id="mySidenav" class="sidenav">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
-                        <a href="#">Home</a>
-                        <a href="#">Trending</a>
-                        <a href="#">Subscriptions</a>
-                        <a href="#">Library</a>
-                        <a href="#">History</a>
-                        <a href="#">Watch later</a>
-                        <a href="#">Liked videos</a>
-                        <a href="#">Popular on YouTube</a>
-                        <a href="#">Music</a>
-                        <a href="#">Sports</a>
-                        <a href="#">Gaming</a>
-                        <a href="#">YouTube Premium</a>
-                        <a href="#">Gaming</a>
-                        <a href="#">Report history</a>
-                        <a href="#">Help</a>
-                        <a href="#">Send feedback</a>
-                    </div>
-                    <div id="main">
-                        <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776;</span>
-                    </div>
-                    <!-- <div class="icon-bar mt-5 pt-3">
-                        <a class="active" href="#"><i class="fa fa-home"></i></a> 
-                        <a href="#"><i class="fa fa-search"></i></a> 
-                        <a href="#"><i class="fa fa-envelope"></i></a> 
-                        <a href="#"><i class="fa fa-globe"></i></a>
-                        <a href="#"><i class="fa fa-trash"></i></a>
-                    </div> -->
-                    <!-- buat hamburger bar -->
-                </div>
-                <div class="col-2">
-                    <div class="logo-youtube">
-                        <img src="{% static 'images/logo-youtube.png' %}", alt="">
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="search-container">
-                        <form action="/search/" method="GET">
-                            <input type="text" placeholder="Search" name="q">
-                            <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
-                        </form>
-                    </div>
-                </div>
-                <div class="col-4 p-0">
-                    <a class="icon-kanan" href="#"><img src="{% static 'images/notifications-icon.png' %}", alt=""></a>
-                    <a class="icon-kanan" href="#"><img src="{% static 'images/youtubeapps-icon.png' %}", alt=""></a>
-                    <a class="icon-kanan" href="#"><img src="{% static 'images/createvideo-icon.png' %}", alt=""></a>
-                    <!-- buat logo sebelah kanan navbar -->
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- end row navbar -->
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
     <section class="body-index">
         <div class="row">
             <div class="col-1">
                 <div class="icon-bar mt-5 pt-3">
-                    <a class="active" href="#"><i class="fa fa-home"></i></a> 
-                    <a href="#"><i class="fa fa-search"></i></a> 
+                    <a class="active" href="{% url 'app_youtube:index' %}"><i class="fa fa-home"></i></a> 
+                    <a href="{% url 'app_youtube:search' %}"><i class="fa fa-search"></i></a> 
                     <a href="#"><i class="fa fa-envelope"></i></a> 
                     <a href="#"><i class="fa fa-globe"></i></a>
                     <a href="#"><i class="fa fa-trash"></i></a>
@@ -96,7 +24,7 @@
             <div class="col-1"></div>
             <div class="col-11">
                 <div class="list-videos-index">
-                    <a href="{{video.pk}}">
+                    <a href="../{{video.pk}}">
                         <div class="row">
                             <div class="col-3">
                                 <video src="{{video.video.url}}" width="100%" max-height="100px">
@@ -107,7 +35,7 @@
                             </div>
                             <div class="col-6">
                                 <p class="title-search-vid">{{video.title}}</p>
-                                <p class="desc-search-title-vid">{{video.username}} &middot; {{video.userviews_set.all|length}} views &middot; {{video.post_date.date}}</p>
+                                <p class="desc-search-title-vid">{{video.username}} &middot; {{video.userviews_set.all|length}} views &middot; {{video.post_date|naturaltime}}</p>
                                 <p class="desc-search-title-vid">{{video.description|truncatewords:10}}</p>
                             </div>
                             <div class="col-3"></div>
@@ -119,5 +47,4 @@
         {% endfor %}
 
     </section>
-</body>
-</html>
+{% endblock %}
