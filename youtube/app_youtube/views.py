@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Users, Videos, Comments, Likes, Dislikes, UserViews
-from .forms import VideoSearchForm,  CreateUserForm, CommentForm
+from .forms import VideoSearchForm,  CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -13,23 +13,34 @@ def index(request):
 # @login_required(login_url='app_youtube:login')
 def video_open(request, video_id):
     open_video = get_object_or_404(Videos, pk=video_id)
+    user = get_object_or_404(Users, pk=1)
     videos = Videos.objects.all()
     view_videos = UserViews.objects.all()
     
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('app_youtube:video_open')
-    else:
-        form = CommentForm()
+        cm = Comments.objects.create(
+            video = open_video,
+            username = user,
+            describe = request.POST.get('commenttt'),
+            post_date = '2020-04-10'
+        )
+        cm.save()
     
     return render(request, 'video_open.html', {
         'open_video':open_video,
         'videos': videos,
         'view_videos': view_videos,
-        'form': form
+        # 'videos': videos,
+        'post_active': True
     })
+    
+def video_like_dislike(request, videos_id):
+    videos = get_object_or_404(Videos, pk=videos_id)
+    like = videos.like_video
+    dislike = videos.dislike_video
+    Videos.objects.filter(pk=videos_id).update(like_video = like+1)
+    Videos.objects.filter(pk=videos_id).update(dislike_video = dislike+1)
+    return redirect('video/'+str(videos_id)+'/')
 
 # search video
 def videos(request):
@@ -82,15 +93,3 @@ def logoutUser(request):
     logout(request)
     return redirect('app_youtube:login')
 
-# def add_comment_to_post(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     if request.method == "POST":
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.post = post
-#             comment.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'blog/add_comment_to_post.html', {'form': form})

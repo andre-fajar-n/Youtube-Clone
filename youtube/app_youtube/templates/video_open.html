@@ -29,12 +29,19 @@
                         <!-- end view & upload date -->
                         <!-- start like, dislike, etc -->
                         <div class="col-7">
-                            <img src="{% static 'images/like.png' %}" style="height: 15px;">
-                            <p class="d-inline">{{open_video.likes_set.all|length}}&nbsp;</p>
-                            <img src="{% static 'images/dislike.png' %}" style="height: 15px;">
-                            <p class="d-inline">{{open_video.dislikes_set.all|length}}&nbsp;</p>
+                            <a href="/like_video/{{open_video.id}}">
+                                <img src="{% static 'images/like.png' %}" style="height: 15px;">
+                            </a>
+                            <p class="d-inline">{{open_video.like_video}}&nbsp;</p>
+
+                            <a href="/dislike_video/{{open_video.id}}">
+                                <img src="{% static 'images/dislike.png' %}" style="height: 15px;">
+                            </a>
+                            <p class="d-inline">{{open_video.dislike_video}}&nbsp;</p>
+                            
                             <img src="{% static 'images/share.png' %}" style="height: 15px;">
                             <p class="d-inline">SHARE&nbsp;</p>
+                            
                             <img src="{% static 'images/save.png' %}" style="height: 15px;">
                             <p class="d-inline">SAVE&nbsp;</p>
                         </div>
@@ -43,11 +50,10 @@
                     <strong>{{open_video.username}}</strong>
                     <p>{{open_video.description}}</p>
                     <!-- end info video -->
-                    <!-- {{open_video.comments_set.all}} -->
                     <form method="POST">
                         {% csrf_token %}
-                        {{form.as_p}}
-                        <button type="submit">Comment</button>
+                        <textarea name="commenttt" id="exampleFormControlTextarea1" rows="3" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-primary">Comment</button>
                     </form>
                     {% for comment in open_video.comments_set.all %}
                         <div class="comment">
@@ -65,11 +71,11 @@
                     {% for video in videos %}
                     <div class="row">
                         <div class="col-5">
-                            <!-- <video src="{{video.video.url}}" width="100%" controls> -->
+                            <video src="{{video.video.url}}" width="100%">
                                 <source src="{{video.video.url}}" type="video/mp4">
                                 <source src="{{video.video.url}}" type="video/ogg">
-                                <!-- Your browser does not support HTML5 video.
-                            </video> -->
+                                Your browser does not support HTML5 video.
+                            </video>
                         </div>
                         <div class="col-7">
                             <strong class="mb-0 title-other-video">{{video.title}}</strong>
