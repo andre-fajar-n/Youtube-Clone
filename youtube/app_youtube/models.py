@@ -47,6 +47,8 @@ class Videos(models.Model):
     category = models.CharField(max_length=2, choices=list_category, default='FA')
     post_date = models.DateTimeField( auto_now=True, blank=True)
     keywords = models.CharField(max_length=255, default='')
+    like_video = models.IntegerField(default=0)
+    dislike_video = models.IntegerField(default=0)
     description = models.TextField()
     
     def __str__(self):
@@ -55,7 +57,7 @@ class Videos(models.Model):
 class Comments(models.Model):
     username = models.ForeignKey(Users, on_delete=models.CASCADE)
     video = models.ForeignKey(Videos, on_delete=models.CASCADE)
-    describe = models.TextField()
+    describe = models.TextField(null=True)
     post_date = models.DateTimeField(blank=True, auto_now=True)
     
     def __str__(self):
