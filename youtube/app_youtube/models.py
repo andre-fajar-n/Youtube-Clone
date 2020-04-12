@@ -6,6 +6,7 @@ class Users(models.Model):
     username = models.CharField(max_length=255, default='')
     email = models.EmailField(max_length=255, default='')
     password = models.CharField(max_length=255, default='')
+    # confirm_password = models.CharField(max_length=255, default='')
     birthday = models.DateField(auto_now=True, blank=True)
     gender_choices = [
         ('M', 'Male'),
@@ -57,10 +58,8 @@ class Comments(models.Model):
     describe = models.TextField()
     post_date = models.DateTimeField(blank=True, auto_now=True)
     
-    class Meta:
-        ordering = ['post_date']
-    
     def __str__(self):
+        self.save()
         return 'Comment %s by %s'%(self.describe, self.username)
     
 class Likes(models.Model):
