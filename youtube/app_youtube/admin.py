@@ -8,6 +8,3 @@ admin.site.register(Comments)
 admin.site.register(Likes)
 admin.site.register(Dislikes)
 admin.site.register(UserViews)
-
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('')
