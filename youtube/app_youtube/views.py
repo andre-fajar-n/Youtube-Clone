@@ -6,11 +6,16 @@ from django.db.models import Q
 from django.views.generic import ListView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
     videos = Videos.objects.all()
-    return render(request, 'index.html', {'videos': videos})
+    paginator = Paginator(videos, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'index.html', {'page_obj': page_obj})
 
 # @login_required(login_url='app_youtube:login')
 def video_open(request, video_id):
@@ -36,13 +41,17 @@ def video_open(request, video_id):
         'post_active': True
     })
     
-def video_like_dislike(request, videos_id):
+def video_like(request, videos_id):
     videos = get_object_or_404(Videos, pk=videos_id)
     like = videos.like_video
-    dislike = videos.dislike_video
     Videos.objects.filter(pk=videos_id).update(like_video = like+1)
+    return redirect('/'+str(videos_id)+'/')
+
+def video_dislike(request, videos_id):
+    videos = get_object_or_404(Videos, pk=videos_id)
+    dislike = videos.dislike_video
     Videos.objects.filter(pk=videos_id).update(dislike_video = dislike+1)
-    return redirect('video/'+str(videos_id)+'/')
+    return redirect('/'+str(videos_id)+'/')
 
 # search video
 def video_search(request):
