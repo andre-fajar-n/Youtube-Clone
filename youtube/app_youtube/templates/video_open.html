@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+
+{% block title %}
+<title>{{open_video.title}}</title>
+
+{% endblock %}
 {% block content %}
     <section class="body-index">
         <div class="container-fluid">

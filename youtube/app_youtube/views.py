@@ -57,7 +57,7 @@ def video_dislike(request, videos_id):
 def video_search(request):
     keyword = request.GET.get('q')
     hasil = Videos.objects.filter(title__contains=keyword)
-    return render(request, 'searchpage.html', {'videos': hasil})
+    return render(request, 'searchpage.html', {'videos': hasil, 'keyword': keyword})
 
 def registerPage(request):
     if request.user.is_authenticated:
