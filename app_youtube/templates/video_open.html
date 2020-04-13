@@ -53,6 +53,7 @@
                         <textarea name="commenttt" id="exampleFormControlTextarea1" rows="3" class="form-control"></textarea>
                         <button type="submit" class="btn btn-primary">Comment</button>
                     </form>
+                    {{open_video.comments_set.all|length}} &nbsp; Comment
                     {% for comment in open_video.comments_set.all %}
                         <div class="comment">
                             <strong>{{comment.username}}</strong>
