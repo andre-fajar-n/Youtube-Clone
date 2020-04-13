@@ -27,7 +27,7 @@
             <div class="col-1"></div>
             <div class="col-11">
                 <div class="list-videos-index">
-                    <a href="../{{video.pk}}">
+                    <a href="../{{video.pk}}" style="text-decoration: none;">
                         <div class="row">
                             <div class="col-3">
                                 <video src="{{video.video.url}}" width="100%" max-height="100px">
@@ -37,9 +37,9 @@
                                 </video>
                             </div>
                             <div class="col-6">
-                                <p class="title-search-vid">{{video.title}}</p>
-                                <p class="desc-search-title-vid">{{video.username}} &middot; {{video.userviews_set.all|length}} views &middot; {{video.post_date|naturaltime}}</p>
-                                <p class="desc-search-title-vid">{{video.description|truncatewords:10}}</p>
+                                <p class="title-search-vid"><div class="style-txt-title">{{video.title}}</div></p>
+                                <p class="desc-search-title-vid"><div class="style-txt">{{video.username}} &middot; {{video.userviews_set.all|length}} views &middot; {{video.post_date|naturaltime}}</div></p>
+                                <p class="desc-search-title-vid"><div class="style-txt">{{video.description|truncatewords:10}}</div></p>
                             </div>
                             <div class="col-3"></div>
                         </div>
