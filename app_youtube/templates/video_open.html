@@ -44,16 +44,20 @@
                             <p class="d-inline">SAVE&nbsp;</p>
                         </div>
                         <!-- end like, dislike, etc -->
-                    </div>
+                    </div><br>
                     <strong>{{open_video.username}}</strong>
-                    <p>{{open_video.description}}</p>
+                    <p>{{open_video.description}}</p><br>
                     <!-- end info video -->
                     <form method="POST">
                         {% csrf_token %}
                         <textarea name="commenttt" id="exampleFormControlTextarea1" rows="3" class="form-control"></textarea>
                         <button type="submit" class="btn btn-primary">Comment</button>
                     </form>
-                    {{open_video.comments_set.all|length}} &nbsp; Comment
+                    {% if open_video.comments_set.all|length != 0 %}
+                    <p>
+                        {{open_video.comments_set.all|length}} &nbsp; Comments
+                    </p>
+                    {% endif %}
                     {% for comment in open_video.comments_set.all %}
                         <div class="comment">
                             <strong>{{comment.username}}</strong>
@@ -69,7 +73,7 @@
                 <div class="col-4 mt-4">
                     <p class="recommended-vid">Recommended for you</p>
                     {% for video in videos %}
-                    <a href="../{{video.pk}}">
+                    <a href="../{{video.pk}}" style="text-decoration: none;">
                         <div class="row">
                             <div class="col-6 mt-2">
                                 <video src="{{video.video.url}}" style="width:200px">
@@ -79,9 +83,9 @@
                                 </video>
                             </div>
                             <div class="col-6">
-                                <strong class="mb-0 title-other-video">{{video.title}}</strong>
-                                <p class="mb-0 info-other-video">{{video.username}}</p>
-                                <p class="mb-0 info-other-video">{{video.userviews_set.all|length}} view &middot; {{video.post_date|naturaltime}}</p>
+                                <p class="title-vid"> <div class="style-txt-title"> {{video.title}}</div></p>
+                                <p class="desc-title-vid"><div class="style-txt">{{video.username}}</div></p>
+                                <p class="desc-title-vid"><div class="style-txt">{{video.userviews_set.all|length}} view &middot; {{video.post_date|naturaltime}}</div></p>
                             </div>
                         </div>
                     </a>

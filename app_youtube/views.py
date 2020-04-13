@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 @login_required(login_url='app_youtube:login')
 def index(request):
     videos = Videos.objects.all()
-    paginator = Paginator(videos, 4)
+    paginator = Paginator(videos, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

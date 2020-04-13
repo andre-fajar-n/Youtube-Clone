@@ -8,10 +8,10 @@
 {% block content %}
     <section class="body-index">
         <div class="row">
-            <div class="col-1">
+            <div class="col-1" style="z-index: 99;">
                 <div class="icon-bar mt-5 pt-3">
                     <a class="active" href="{% url 'app_youtube:index' %}"><i class="fa fa-home"></i></a> 
-                    <a href="{% url 'app_youtube:search' %}"><i class="fa fa-search"></i></a>
+                    <a href="#"><i class="fa fa-search"></i></a>
                     <a href="#"><i class="fa fa-envelope"></i></a> 
                     <a href="#"><i class="fa fa-globe"></i></a>
                     <a href="#"><i class="fa fa-trash"></i></a>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-11 mt-3">
                 <div class="body-index">
-                    <h3>Recommended</h3>
+                    <h4>Recommended</h4>
                 </div>
             </div>
         </div>
@@ -30,15 +30,15 @@
                     <div class="row">
                         {% for video in page_obj %}
                         <div class="col-3">
-                            <a href="{{video.pk}}">
+                            <a href="{{video.pk}}" style="text-decoration: none;">
                                 <video width="100%">
                                     <source src="{{video.video.url}}" type="video/mp4">
                                     <source src="{{video.video.url}}" type="video/ogg">
                                     Your browser does not support HTML5 video.
                                 </video>
-                                <p class="title-vid">{{video.title}}</p>
-                                <p class="desc-title-vid">{{video.username}}</p>
-                                <p class="desc-title-vid">{{video.userviews_set.all|length}} view &middot; {{video.post_date|naturaltime}}</p>
+                                <p class="title-vid"> <div class="style-txt-title"> {{video.title}}</div></p>
+                                <p class="desc-title-vid"><div class="style-txt">{{video.username}}</div></p>
+                                <p class="desc-title-vid"><div class="style-txt">{{video.userviews_set.all|length}} view &middot; {{video.post_date|naturaltime}}</div></p>
                             </a>
                         </div>   
                         {% endfor %}
@@ -63,141 +63,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="row mt-5">
-            <div class="col-1"></div>
-            <div class="col-11">
-                <div class="list-videos-index">
-                    <div class="row">
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-1"></div>
-            <div class="col-11 mt-3">
-                <div class="body-index">
-                    <h3>Hot News</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-1"></div>
-            <div class="col-11">
-                <div class="list-videos-index">
-                    <div class="row">
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-1"></div>
-            <div class="col-11">
-                <div class="list-videos-index">
-                    <div class="row">
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.youtube.com/watch?v=HNvmHQCtaKU&list=RDHNvmHQCtaKU&start_radio=1">
-                                <img src="images/cat.jpeg" alt="Cat" style="width:270px">
-                            </a>
-                            <p class="title-vid">Ardhito Pramono - bitterlove (Official Video)</p>
-                            <p class="desc-title-vid">Arhito Pramono</p>
-                            <p class="desc-title-vid">1M views . 1 month ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
     </section>
 {% endblock %}
