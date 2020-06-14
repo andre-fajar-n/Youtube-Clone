@@ -41,7 +41,7 @@ def video_open(request, video_id):
         # 'videos': videos,
         'post_active': True
     })
-    
+
 def video_like(request, videos_id):
     videos = get_object_or_404(Videos, pk=videos_id)
     like = videos.like_video
